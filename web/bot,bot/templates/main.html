@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}Bot, bots{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div>
+        <h1>My first API!!</h1>
+        <p>
+            If you found errors while using the <a href="{{ url_for('api_usage') }}">API</a>,
+            contact admin on <a href="{{ url_for('report_error') }}">error report</a> page.
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}Bot, bots{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div>
+        <h1>Report Error.</h1>
+        <p>
+            If you found errors while using the <a href="{{ url_for('api_usage') }}">API</a>,
+            contact admin by submitting this form. A bot will review the content right away.
+        </p>
+        <br /><hr /><br />
+        <form method="post" action="{{ url_for('report_error') }}">
+            <b>Decription</b><br />
+            <textarea name="report" style="width:80%; height:100px;"></textarea><br />
+            <input type="submit">
+        </form>
+    </div>
+{% endblock %}
