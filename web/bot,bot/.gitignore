@@ -1,0 +1,6 @@
+.idea/
+venv/
+virtualenv/
+chromedriver
+flag.txt
+*.db
