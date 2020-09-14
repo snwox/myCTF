@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="nav" style="display: inline;">
+      {% block navbar %}
+
+      {% endblock %}
+        <a href="{{ url_for('index') }}">main</a>
+        <a href="{{ url_for('report_error') }}">error report</a>
+        <a href="{{ url_for('login') }}">login</a>
+        <a href="{{ url_for('api_usage') }}">api</a>
+      <hr />
+    </div>
+    <div id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div id="footer">
+      {% block footer %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

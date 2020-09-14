@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}Bot, bots{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div>
+        <h1>My first API!!</h1>
+        <p>
+            I built my first DB API with Python..!!
+        </p>
+
+        {% if level > 1 %}
+            <p style="color: gray">
+                Since there was a lot of <i>hackers</i> to ruin my system, I've blocked my API to
+                only run on <b>localhost</b>, since it is really secure.
+            </p>
+        {% endif %}
+        {% if level > 2 %}
+            <p style="color: gray">
+                I invented <b>new filtering methods</b> to protect my system. <i>Boo!</i>
+            </p>
+        {% endif %}
+
+        <p>
+            <h2>API USAGE</h2>
+            <span>You can run SQL commands with my API. Commands are seperated by '/'</span><br /><br />
+            <i>examples: </i>
+            <li>/api/select/id/from/users/where/id/=/'guest'</li>
+            <li>/api/select/id/from/users/where/state/=/'blocked'</li>
+            <li>/api/select/id/from/users/where/role/=/'visitor'</li>
+        </p>
+    </div>
+{% endblock %}
