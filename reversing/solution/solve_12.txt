@@ -1,0 +1,12 @@
+           _Dest[i] << (8 - (i & 7) & 0x1f) |
+           (_Dest[i] >> (i & 7) & 0x1f)); // ROR
+
+             (_Dest[i] >> (8 - (i & 7)) & 0x1f) |
+             _Dest[i] << ((i & 7) & 0x1f); //ROL
+
+          _Dest[local_10] =
+               ((_Dest[local_10] ^ 6) >> 1) + ((_Dest[local_10] ^ 6) & 1) +
+               ((_Dest[local_10] ^ 6) & 1) + ((_Dest[local_10] ^ 6) & 1) +
+               ((_Dest[local_10] ^ 6) & 1) + ((_Dest[local_10] ^ 6) & 1) +
+               ((_Dest[local_10] ^ 6) & 1) + ((_Dest[local_10] ^ 6) & 1) +
+               ((_Dest[local_10] ^ 6) & 1); 
