@@ -1,0 +1,135 @@
+<p>
+    <b> input: </b><span id='showinput'></span>
+</p>
+<form>
+    <input type='button' id='0' onclick='addvalue("0")' value='0'>
+    <input type='button' id='1' onclick='addvalue("1")' value='1'>    
+    <input type='button' id='2' onclick='addvalue("2")' value='2'>
+    <input type='button' id='3' onclick='addvalue("3")' value='3'>    
+    <input type='button' id='4' onclick='addvalue("4")' value='4'>
+    <input type='button' id='5' onclick='addvalue("5")' value='5'>    
+    <input type='button' id='6' onclick='addvalue("6")' value='6'>
+    <input type='button' id='7' onclick='addvalue("7")' value='7'>    
+    <input type='button' id='8' onclick='addvalue("8")' value='8'>
+    <input type='button' id='9' onclick='addvalue("9")' value='9'>    
+    <input type='button' id='A' onclick='addvalue("A")' value='A'>
+    <input type='button' id='B' onclick='addvalue("B")' value='B'>    
+    <input type='button' id='C' onclick='addvalue("C")' value='C'>
+    <input type='button' id='D' onclick='addvalue("D")' value='D'>    
+    <input type='button' id='E' onclick='addvalue("E")' value='E'>
+    <input type='button' id='F' onclick='addvalue("F")' value='F'>
+    <input type='button' id='check' onclick='validate()' value='check'>
+</form>
+
+<script>
+    var input = '';
+    function addvalue(n)
+    {
+        input += n;
+        document.getElementById('showinput').innerHTML = input;
+    }
+    
+    function _____(a) {
+        var a = a.toString();   
+        var b = '';     
+        for (var i = 0; i < a.length; i += 2)         
+        b += String.fromCharCode(parseInt(a.substr(i, 2), 16));     
+        return b; 
+    }
+    
+    function ____(a, b)
+    {
+        return a ^ b;
+    }
+    
+    function ______(a, b)
+    {
+        c = '';
+        if (a.length % b != 0)
+        {
+            for (i=0; i<(b - (a.length % b)); i++)
+            {
+                c += '0';
+            }
+        }
+        return a + c;
+    }
+    
+    function _______(a, b)
+    {
+        a = ______(a, b);
+        c = [];
+        for (i=0; i<a.length; i+=b)
+        {
+            c.push(a.substr(i, b));
+        }
+        return c;
+    }
+    
+    function ________(a, b)
+    {
+        c = _______(a, b/2);
+        return c[1] + c[0];
+    }
+    
+    function __________(a)
+    {
+        return parseInt(a, 16);
+    }
+    function __(a)
+    {
+        return ('00'+a.toString(16)).substr(-2);
+    }
+    
+    function _________(a)
+    {
+        a = ______(a, 4);
+        temp = _______(a, 2);
+        a = '';
+        for (i=0; i<temp.length; i+=2)
+        {
+            a += __(____(__________(temp[i]),__________(temp[i+1])));
+            a += __(__________(temp[i+1]));
+        }
+        return a;
+    }
+    
+    function _(a)
+    {
+        a = ______(a, 4);
+        temp = _______(a, 4);
+        
+        a = '';
+        for (j=0; j<temp.length; j+=1)
+        {
+            a += (________(temp[j],4));
+        }
+        return a;
+    }
+    
+    function ___________(a, b)
+    {       
+        if (a.length < 1) return '\00';        
+        
+        switch(b)
+        {
+            case 1:return _(_________(a));break;
+            case 2:return _________(_(a));break;
+        }
+    }
+    
+    function validate()
+    {
+        if (___________(input,1) == '6c0a67066a1130556709691a5f31610f40275f337532394d741565047e00007d')
+        {
+            alert(_____(___________(___________(input,1),2)));
+        }
+        else
+        {
+            alert('No!');
+        }
+        
+        input = '';
+        document.getElementById('showinput').innerHTML = input;
+    }
+</script>
