@@ -1,0 +1,135 @@
+<p>
+    <b> input: </b><span id='showinput'></span>
+</p>
+<form>
+    <input type='button' id='0' onclick='addvalue("0")' value='0'>
+    <input type='button' id='1' onclick='addvalue("1")' value='1'>    
+    <input type='button' id='2' onclick='addvalue("2")' value='2'>
+    <input type='button' id='3' onclick='addvalue("3")' value='3'>    
+    <input type='button' id='4' onclick='addvalue("4")' value='4'>
+    <input type='button' id='5' onclick='addvalue("5")' value='5'>    
+    <input type='button' id='6' onclick='addvalue("6")' value='6'>
+    <input type='button' id='7' onclick='addvalue("7")' value='7'>    
+    <input type='button' id='8' onclick='addvalue("8")' value='8'>
+    <input type='button' id='9' onclick='addvalue("9")' value='9'>    
+    <input type='button' id='A' onclick='addvalue("A")' value='A'>
+    <input type='button' id='B' onclick='addvalue("B")' value='B'>    
+    <input type='button' id='C' onclick='addvalue("C")' value='C'>
+    <input type='button' id='D' onclick='addvalue("D")' value='D'>    
+    <input type='button' id='E' onclick='addvalue("E")' value='E'>
+    <input type='button' id='F' onclick='addvalue("F")' value='F'>
+    <input type='button' id='check' onclick='validate()' value='check'>
+</form>
+
+<script>
+    var input = '';
+    function addvalue(n)
+    {
+        input += n;
+        document.getElementById('showinput').innerHTML = input;
+    }
+    
+    function hex2a(hexx) {
+        var hex = hexx.toString();   
+        var str = '';     
+        for (var i = 0; i < hex.length; i += 2)         
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));     
+        return str; 
+    }
+    
+    function xor(a, b)
+    {
+        return a ^ b;
+    }
+    
+    function addpadding(a, b)
+    {
+        c = '';
+        if (a.length % b != 0)
+        {
+            for (i=0; i<(b - (a.length % b)); i++)
+            {
+                c += '0';
+            }
+        }
+        return a + c;
+    }
+    
+    function parse(a, b)
+    {
+        a = addpadding(a, b);
+        c = [];
+        for (i=0; i<a.length; i+=b)
+        {
+            c.push(a.substr(i, b));
+        }
+        return c;
+    }
+    
+    function switchh(a, b)
+    {
+        c = parse(a, b/2);
+        return c[1] + c[0];
+    }
+    
+    function toint(a)
+    {
+        return parseInt(a, 16);
+    }
+    function tohex(a)
+    {
+        return ('00'+a.toString(16)).substr(-2);
+    }
+    
+    function round1(a)
+    {
+        a = addpadding(a, 4);
+        temp = parse(a, 2);
+        a = '';
+        for (i=0; i<temp.length; i+=2)
+        {
+            a += tohex(xor(toint(temp[i]),toint(temp[i+1])));
+            a += tohex(toint(temp[i+1]));
+        }
+        return a;
+    }
+    
+    function round2(a)
+    {
+        a = addpadding(a, 4);
+        temp = parse(a, 4);
+        
+        a = '';
+        for (j=0; j<temp.length; j+=1)
+        {
+            a += (switchh(temp[j],4));
+        }
+        return a;
+    }
+    
+    function encrypt(a, b)
+    {       
+        if (a.length < 1) return '\00';        
+        
+        switch(b)
+        {
+            case 1:return round2(round1(a));break;
+            case 2:return round1(round2(a));break;
+        }
+    }
+    
+    function validate()
+    {
+        if (encrypt(input,1) == '6c0a67066a1130556709691a5f31610f40275f337532394d741565047e00007d')
+        {
+            alert(hex2a(encrypt(encrypt(input,1),2)));
+        }
+        else
+        {
+            alert('No!');
+        }
+        
+        input = '';
+        document.getElementById('showinput').innerHTML = input;
+    }
+</script>
