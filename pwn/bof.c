@@ -2,7 +2,7 @@
 #include<stdio.h>
 
 int main(void){
-	char buf[60];
-	scanf("%64s",buf);
-	printf("%s",buf);
+	char buf[64];
+	write(1,"input msg >",11);
+	gets(buf);
 }
